@@ -6,6 +6,10 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { RolesModule } from './modules/roles/roles.module';
 import { UsuariosModule } from './modules/usuarios/usuarios.module';
 import { SeguidoresModule } from './modules/seguidores/seguidores.modules';
+import { ComentariosModule } from './modules/comentarios/comentarios.modules';
+import { Publicaciones } from './modules/publicaciones/schemas/publicaciones.schema';
+import { PublicacionesModule } from './modules/publicaciones/publicaciones.modules';
+import { ReaccionesModule } from './modules/reacciones/reacciones.modules';
 
 @Module({
   imports: [
@@ -13,6 +17,9 @@ import { SeguidoresModule } from './modules/seguidores/seguidores.modules';
     RolesModule,
     UsuariosModule,
     SeguidoresModule,
+    ComentariosModule,
+    PublicacionesModule,
+    ReaccionesModule,
     MongooseModule.forRoot(process.env.MONGO_URI as string),
   ],
   controllers: [AppController],
