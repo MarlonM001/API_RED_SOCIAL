@@ -2,11 +2,10 @@
 import {
   BadRequestException,
   Injectable,
-  NotFoundException,
-  Search,} 
+  NotFoundException,} 
 from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { User, UserDocument } from './schemas/user.schema';
+import { Usuarios, UserDocument } from './schemas/user.schema';
 import { Model } from 'mongoose';
 import { CreateUserDto } from './dto/create-user.dto';
 import * as bcrypt from 'bcrypt';
@@ -17,7 +16,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 @Injectable()
 export class UsuariosService {
   constructor(
-    @InjectModel(User.name)
+    @InjectModel(Usuarios.name)
     private readonly userModel: Model<UserDocument>,
   ) {}
 
@@ -62,7 +61,7 @@ export class UsuariosService {
     // CONSULTA
     const data = await this.userModel
       .find(filter)
-      .populate('rol_id')
+      .populate('role_id')
       .skip((page - 1) * limit)
       .limit(limit);
 
@@ -81,7 +80,7 @@ export class UsuariosService {
    * CONSULTA POR ID DE USUARIO
    */
   async findOne(id: string) {
-    const user = await this.userModel.findById(id).populate('rol_id');
+    const user = await this.userModel.findById(id).populate('role_id');
 
     if (!user) {
       throw new NotFoundException('Usuario No encontrado');
