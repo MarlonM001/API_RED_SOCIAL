@@ -5,7 +5,7 @@ import {
 } from '@nestjs/mongoose';
 import { Document, Types } from 'mongoose';
 
-export type UserDocument = User & Document;
+export type UserDocument = Usuarios & Document;
 
 
     /**
@@ -15,7 +15,7 @@ export type UserDocument = User & Document;
     @Schema({
         timestamps: true,
     })
-    export class User {
+    export class Usuarios {
         @Prop({ required: true })
         nombre!: string;
 
@@ -27,7 +27,7 @@ export type UserDocument = User & Document;
         password!: string;
 
     @Prop({ type: Types.ObjectId, ref: 'Role', required: true })
-        role!: Types.ObjectId;
+        role_id!: Types.ObjectId;
 
     @Prop({ default: true})
         activo!: boolean;
@@ -35,6 +35,6 @@ export type UserDocument = User & Document;
     
 }
 
-export const UserSchema = SchemaFactory.createForClass(User);
+export const UserSchema = SchemaFactory.createForClass(Usuarios);
 
 UserSchema.index({ correo: 1 });
